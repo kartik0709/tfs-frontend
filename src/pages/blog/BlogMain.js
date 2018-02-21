@@ -46,7 +46,7 @@ class BlogMain extends Component{
         this.handleClick = this.handleClick.bind(this)
     }
     async componentDidMount(){
-        let post = await axios.get('http://www.tfsolutions.herokuapp.com/api/blog/');
+        let post = await axios.get('https://tfsolutions.herokuapp.com/api/blog/');
         post = post.data;
         this.setState({post})
     }
