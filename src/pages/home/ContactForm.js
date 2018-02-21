@@ -131,7 +131,7 @@ class ContactForm extends Component{
                     });
                 }
             }).catch(function (error) {
-                this.setState({send: "send", disabled: false});
+                self.setState({send: "send", disabled: false});
                 Alert.error('<h3>Error!</h3> ' + error.response.data, {
                     position: 'bottom-right',
                     effect: 'jelly',
