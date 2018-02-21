@@ -12,6 +12,15 @@ const H1Class = "post-title";
 const MetaClass = "post-meta";
 const ContentClass = "post-body";
 const ReadMore = "post-read-more";
+const Loading = "fa fa-spinner fa-spin";
+
+function LoadingIcon(){
+    return (
+        <div style={{fontSize: "30px", textAlign: "center"}}>
+            <i className={Loading} style={{width: "5%"}}/>loading...
+        </div>
+    )
+}
 
 function Post(props){
     return(
@@ -21,7 +30,7 @@ function Post(props){
                     <header className={HeaderClass}>
                         <h1 className={H1Class}>{props.title}</h1>
                         <div className={MetaClass}>
-                            <span>Written by <strong>Kartik</strong> on Thursday, February 15, 2018</span>
+                            <span>Written by <strong>Mannit Trehan</strong> on Thursday, February 15, 2018</span>
                         </div>
                     </header>
                     <div className={ContentClass + " " + InnerDivClass3}>
@@ -42,22 +51,18 @@ class BlogMain extends Component{
     constructor(props){
         super(props);
 
-        this.state = {post: []};
-        this.handleClick = this.handleClick.bind(this)
+        this.state = {post: [], loading: true};
     }
     async componentDidMount(){
         let post = await axios.get('https://tfsolutions.herokuapp.com/api/blog/');
         post = post.data;
-        this.setState({post})
-    }
-    handleClick(id){
-
+        this.setState({post: post, loading: false})
     }
     render(){
         return(
             <div className={DivClass}>
                 <div style={{marginTop: "6em"}}>
-                    {this.state.post.map((item) => <Post key={item.id} {...item} onClick={this.handleClick}/>)}
+                    {this.state.loading ? <LoadingIcon/> : this.state.post.map((item) => <Post key={item.id} {...item} />)}
                 </div>
             </div>
         )
