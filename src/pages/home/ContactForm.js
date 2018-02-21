@@ -114,30 +114,29 @@ class ContactForm extends Component{
         const self = this;
         event.preventDefault();
         if (this.checkForm() !== false) {
-            this.setState({send: "sending...", disabled: true}, ()=>{
-                axios.post('https://tfsolutions.herokuapp.com/api/contact/', {
-                    name: this.state.name,
-                    email: this.state.email,
-                    phone: this.state.phone,
-                    message: this.state.message,
-                }).then(function (response) {
-                    if (response.status === 200) {
-                        self.setState({name: "", email: "", phone: "", message: "", send: "send", disabled: false});
-                        Alert.success('<h3>Message Sent!</h3>', {
-                            position: 'bottom-right',
-                            effect: 'jelly',
-                            timeout: 5000,
-                            offset: 100
-                        });
-                    }
-                }).catch(function (error) {
-                    this.setState({send: "send", disabled: false});
-                    Alert.error('<h3>Error!</h3> ' + error.response.data, {
+            this.setState({send: "sending...", disabled: true});
+            axios.post('https://tfsolutions.herokuapp.com/api/contact/', {
+                name: this.state.name,
+                email: this.state.email,
+                phone: this.state.phone,
+                message: this.state.message,
+            }).then(function (response) {
+                if (response.status === 200) {
+                    self.setState({name: "", email: "", phone: "", message: "", send: "send", disabled: false});
+                    Alert.success('<h3>Message Sent!</h3>', {
                         position: 'bottom-right',
                         effect: 'jelly',
                         timeout: 5000,
                         offset: 100
                     });
+                }
+            }).catch(function (error) {
+                this.setState({send: "send", disabled: false});
+                Alert.error('<h3>Error!</h3> ' + error.response.data, {
+                    position: 'bottom-right',
+                    effect: 'jelly',
+                    timeout: 5000,
+                    offset: 100
                 });
             });
         }
