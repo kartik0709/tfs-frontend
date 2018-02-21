@@ -20,7 +20,7 @@ class SinglePost extends Component{
         this.state = {post: {}}
     }
     async componentDidMount(){
-        let post = await axios.get('http://127.0.0.1:8000/api/blog/'+this.props.match.params.blogId);
+        let post = await axios.get('https://tfsolutions.herokuapp.com/api/blog/'+this.props.match.params.blogId);
         post = post.data;
         this.setState({post}, console.log(post.datetime))
     }
