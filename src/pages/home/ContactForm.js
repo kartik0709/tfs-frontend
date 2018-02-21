@@ -22,8 +22,8 @@ const FormFields = [{div: "wrap-input100 validate-input", validate: "Name is req
     {div: "wrap-input100", label: "Phone", name: "phone", type: "text", placeholder: "Phone Number..."},];
 
 const InfoFields = [{id: "info_label", div: "flex-w size1 p-b-47", div1: "txt1 p-r-25", icon: "lnr lnr-map-marker", div2: "flex-col size2", span1: "txt1 p-b-20", span2: "txt2", info_label: "Address", info: "Sector-18, Chandigarh"},
-                    {id: "info_phone", div: "dis-flex size1 p-b-47", div1: "txt1 p-r-25", icon: "lnr lnr-phone-handset", div2: "flex-col size2", span1: "txt1 p-b-20", span2: "txt3", info_label: "Lets Talk", info: "+91 98 88889224"},
-                    {id: "info_email", div: "dis-flex size1 p-b-47", div1: "txt1 p-r-25", icon: "lnr lnr-envelope", div2: "flex-col size2", span1: "txt1 p-b-20", span2: "txt3", info_label: "Support", info: "mannit.leo08@gmail.com"}];
+    {id: "info_phone", div: "dis-flex size1 p-b-47", div1: "txt1 p-r-25", icon: "lnr lnr-phone-handset", div2: "flex-col size2", span1: "txt1 p-b-20", span2: "txt3", info_label: "Lets Talk", info: "+91 98 88889224"},
+    {id: "info_email", div: "dis-flex size1 p-b-47", div1: "txt1 p-r-25", icon: "lnr lnr-envelope", div2: "flex-col size2", span1: "txt1 p-b-20", span2: "txt3", info_label: "Support", info: "mannit.leo08@gmail.com"}];
 
 function InputField(props){
     if(props.alert === true && props.fields.indexOf(props.content.name) !== -1 && !props.content.div.includes("alert-validate")){
@@ -115,30 +115,31 @@ class ContactForm extends Component{
         event.preventDefault();
         if (this.checkForm() !== false) {
             this.setState({send: "sending...", disabled: true}, ()=>{
-            axios.post('https://tfsolutions.herokuapp.com/api/contact/', {
-                name: this.state.name,
-                email: this.state.email,
-                phone: this.state.phone,
-                message: this.state.message,
-            }).then(function (response) {
-                if (response.status === 200) {
-                    self.setState({name: "", email: "", phone: "", message: ""});
-                    Alert.success('<h3>Message Sent!</h3>', {
+                axios.post('https://tfsolutions.herokuapp.com/api/contact/', {
+                    name: this.state.name,
+                    email: this.state.email,
+                    phone: this.state.phone,
+                    message: this.state.message,
+                }).then(function (response) {
+                    if (response.status === 200) {
+                        self.setState({name: "", email: "", phone: "", message: "", send: "send", disabled: false});
+                        Alert.success('<h3>Message Sent!</h3>', {
+                            position: 'bottom-right',
+                            effect: 'jelly',
+                            timeout: 5000,
+                            offset: 100
+                        });
+                    }
+                }).catch(function (error) {
+                    this.setState({send: "send", disabled: false});
+                    Alert.error('<h3>Error!</h3> ' + error.response.data, {
                         position: 'bottom-right',
                         effect: 'jelly',
                         timeout: 5000,
                         offset: 100
                     });
-                }
-            }).catch(function (error) {
-                Alert.error('<h3>Error!</h3> ' + error.response.data, {
-                    position: 'bottom-right',
-                    effect: 'jelly',
-                    timeout: 5000,
-                    offset: 100
                 });
-            }); })
-            this.setState({send: "send", disabled: false})
+            });
         }
 
     }
