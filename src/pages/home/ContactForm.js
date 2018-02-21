@@ -114,7 +114,7 @@ class ContactForm extends Component{
         const self = this;
         event.preventDefault();
         if (this.checkForm() !== false) {
-            axios.post('http://127.0.0.1:8000/api/contact/', {
+            axios.post('http://www.tfsolutions.herokuapp.com/api/contact/', {
                 name: this.state.name,
                 email: this.state.email,
                 phone: this.state.phone,
