@@ -65,7 +65,7 @@ class ContactForm extends Component{
         super(props);
 
         let input_div_class = "wrap-input100 validate-input";
-        this.state = {name: "", email: "", phone: "", message: "", alert: false, alert_fields: [], input_div_class: input_div_class};
+        this.state = {name: "", email: "", phone: "", message: "", alert: false, alert_fields: [], input_div_class: input_div_class, send: "send", disabled: false};
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.checkForm = this.checkForm.bind(this);
@@ -114,6 +114,7 @@ class ContactForm extends Component{
         const self = this;
         event.preventDefault();
         if (this.checkForm() !== false) {
+            this.setState({send: "sending...", disabled: true}, ()=>{
             axios.post('https://tfsolutions.herokuapp.com/api/contact/', {
                 name: this.state.name,
                 email: this.state.email,
@@ -136,8 +137,10 @@ class ContactForm extends Component{
                     timeout: 5000,
                     offset: 100
                 });
-            });
+            }); })
+            this.setState({send: "send", disabled: false})
         }
+
     }
     onFocus(event){
         let fields = this.state.alert_fields;
@@ -166,8 +169,8 @@ class ContactForm extends Component{
                     <div className={ContainerButtonClass}>
                         <div className={WrapButtonClass}>
                             <div className={ButtonDivClass}></div>
-                            <button className={ButtonClass} onClick={this.onSubmit}>
-                                Send
+                            <button className={ButtonClass} onClick={this.onSubmit} disabled={this.state.disabled}>
+                                {this.state.send}
                             </button>
                         </div>
                     </div>
