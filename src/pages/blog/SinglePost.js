@@ -12,17 +12,46 @@ const H1Class = "post-title";
 const MetaClass = "post-meta";
 const ContentClass = "post-body";
 const IconClass = "fa fa-arrow-left bckblog";
+const Loading = "fa fa-spinner fa-spin";
+
+function LoadingIcon(){
+    return (
+        <div style={{fontSize: "30px", textAlign: "center"}}>
+            <i className={Loading} />loading...
+        </div>
+    )
+}
+
+function Post(props){
+    return (
+        <div className={InnerDivClass2}>
+            <div className={InnerDivClass3}>
+                <header className={HeaderClass}>
+                    <h1 className={H1Class}>{props.content.title}</h1>
+                    <div className={MetaClass}>
+                        <span>Written by <strong>Kartik</strong> on {props.content.datetime}</span>
+                    </div>
+                </header>
+                <div className={ContentClass + " " + InnerDivClass3}>
+                    <div>
+                        {props.content.content}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 class SinglePost extends Component{
     constructor(props){
         super(props);
 
-        this.state = {post: {}}
+        this.state = {post: {}, loading: true}
     }
     async componentDidMount(){
         let post = await axios.get('https://tfsolutions.herokuapp.com/api/blog/'+this.props.match.params.blogId);
         post = post.data;
-        this.setState({post}, console.log(post.datetime))
+        this.setState({post: post, loading: false})
     }
     render(){
         return(
@@ -30,21 +59,7 @@ class SinglePost extends Component{
                 <div style={{marginTop: "6em"}}>
                     <Link to="/blog" className={IconClass}>  Back to Blog</Link>
                     <div className={InnerDivClass}>
-                        <div className={InnerDivClass2}>
-                            <div className={InnerDivClass3}>
-                                <header className={HeaderClass}>
-                                    <h1 className={H1Class}>{this.state.post.title}</h1>
-                                    <div className={MetaClass}>
-                                        <span>Written by <strong>Kartik</strong> on {this.state.post.datetime}</span>
-                                    </div>
-                                </header>
-                                <div className={ContentClass + " " + InnerDivClass3}>
-                                    <div>
-                                        {this.state.post.content}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {this.state.loading ? <LoadingIcon/> : <Post content={this.state.post}/>}
                     </div>
                 </div>
             </div>

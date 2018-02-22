@@ -17,7 +17,7 @@ const Loading = "fa fa-spinner fa-spin";
 function LoadingIcon(){
     return (
         <div style={{fontSize: "30px", textAlign: "center"}}>
-            <i className={Loading} style={{width: "5%"}}/>loading...
+            <i className={Loading} />loading...
         </div>
     )
 }
