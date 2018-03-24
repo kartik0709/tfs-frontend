@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Reliability from '../../assets/reliability.svg';
-import Tools from '../../assets/tools.svg';
-import Trade from '../../assets/trade.svg'
-import Guidance from '../../assets/guidance.svg'
-import Security from '../../assets/security.svg'
-import Framework from '../../assets/framework.svg'
+import FinancialEducation from '../../assets/financialeducation.svg';
+import TransferOfStocks from '../../assets/transferofstocks.svg';
+import PortfolioGuidance from '../../assets/portfolioguidance.svg';
+import IEPFStockRecovery from '../../assets/iepfstockrecovery.svg';
+import Trading from '../../assets/trading.svg';
+import MutualFunds from '../../assets/mutualfunds.svg';
+import BondInvestment from '../../assets/bondinvestment.svg';
+import DematerialisationAssistance from '../../assets/dematerialisationassistance.svg';
 
 const DivClass = "k block-secondary af";
 const InnerDivClass = "e ays";
@@ -15,12 +17,14 @@ const HeaderClass2 = "agw";
 const BlockDivClass = "gd ail ahd";
 const ImageClass = "agb";
 const BlockWrapClass = "c ag";
-const Content = [[{src: Reliability, p: "Investment in bonds", alt: "investment"},
-                {src: Tools, p: "Sale purchase stocks", alt: "stocks"},
-                {src: Trade, p: "Investment in mutual funds", alt: "mutual funds"}],
-                [{src: Guidance, p: "Portfolio guidance", alt: "portfolio"},
-                {src: Security, p: "Transfer of shares", alt: "transfer"},
-                {src: Framework, p: "Physical to demat", alt: "framework"}],];
+const Content = [[{src: FinancialEducation, p: "Financial Education", alt: "financialeducation"},
+                {src: TransferOfStocks, p: "Transfer of Stocks", alt: "transferofstocks"},
+                {src: PortfolioGuidance, p: "Portfolio Guidance", alt: "portfolioguidance"},
+                {src: IEPFStockRecovery, p: "IEPF Stock Recovery", alt: "stockrecovery"}],
+                [{src: Trading, p: "Trading", alt: "trading"},
+                {src: MutualFunds, p: "Mutual Funds", alt: "mutualfunds"},
+                {src: BondInvestment, p: "Bond Investment", alt: "bondinvestment"},
+                {src: DematerialisationAssistance, p: "Dematerialisation Assistance", alt: "dematerialisationassistance"}],];
 
 function BlockContent(props){
     const Style = {

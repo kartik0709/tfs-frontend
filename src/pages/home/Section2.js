@@ -14,7 +14,7 @@ const ParaClass = "al agw";
 const ContentData = [{div: "fr agp", h5: "Data frequency", p: "We poll for data on a millisecond basis. You can react to\
                     new information in seconds rather than days."},
 // eslint-disable-next-line
-                    {div: "fr", h5: "Reliability &amp; uptime", p: "We process our data across a massively distributed\
+                    {div: "fr", h5: "Reliability & uptime", p: "We process our data across a massively distributed\
                     network of reliable servers to ensure 99.99% uptime, always."}];
 
 
